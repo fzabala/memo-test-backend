@@ -21,7 +21,14 @@ type Query {
         name: String @where(operator: "like")
     ): [User!]! @paginate(defaultCount: 10)
     getMemoTests: [MemoTest!]! @all
-    getMemoTest(id: Int! @eq): MemoTest @find
+    getMemoTestById(id: ID! @eq): MemoTest @find
+    getSessionById(id: ID! @eq): GameSession @find
+}
+
+type Mutation {
+    createGameSession(gameId: Int!): GameSession
+    updateRetriesInSession(id: Int!): GameSession
+    completeSession(id: Int!): GameSession
 }
 
 "Account of a person who utilizes this application."
@@ -57,6 +64,22 @@ type MemoTest {
 type Image {
     id: ID!
     url: String!
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+enum GameSessionStatus {
+    STARTED
+    COMPLETED
+}
+
+type GameSession {
+    id: ID!
+    retries: Int!
+    memo_test_id: Int!
+    number_of_pairs: Int!
+    score: Int
+    state: GameSessionStatus!
     created_at: DateTime!
     updated_at: DateTime!
 }
