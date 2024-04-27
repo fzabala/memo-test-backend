@@ -59,6 +59,7 @@ type MemoTest {
     images: [Image!]! @hasMany
     created_at: DateTime!
     updated_at: DateTime!
+    highest_score: Int
 }
 
 type Image {

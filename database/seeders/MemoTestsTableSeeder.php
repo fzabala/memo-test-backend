@@ -21,6 +21,7 @@ class MemoTestsTableSeeder extends Seeder
 
         $memoTest1 = MemoTest::create([
             'name' => "First memo",
+            'highest_score' => 0,
         ]);
 
         Image::create([
@@ -35,6 +36,7 @@ class MemoTestsTableSeeder extends Seeder
 
         $memoTest2 = MemoTest::create([
             'name' => "Last memo",
+            'highest_score' => 0,
         ]);
 
         Image::create([

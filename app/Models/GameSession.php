@@ -15,6 +15,11 @@ class GameSession extends Model
     public function getScoreAttribute()
     {
         if ($this->retries === 0) return 0;
-        return floor($this->numberOfPairs / $this->retries * 100);
+        return floor($this->number_of_pairs / $this->retries * 100);
+    }
+
+    public function memoTest()
+    {
+        return $this->belongsTo(MemoTest::class);
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class MemoTest extends Model
 {
 
-    protected $fillable = ["name"];
+    protected $fillable = ["name", "highest_score"];
 
     public function images()
     {

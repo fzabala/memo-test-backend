@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\GraphQL\Mutations;
 
 use App\Models\GameSession;
+use App\Models\MemoTest;
 
 final readonly class CreateGameSession
 {
@@ -19,10 +20,13 @@ final readonly class CreateGameSession
             return $gameSession;
         }
 
+        $memoTest = MemoTest::find($gameId);
+        $numberOfPairs = $memoTest->images->count();
+
         return GameSession::create([
             "memo_test_id" => $gameId,
             "retries" => 0,
-            "number_of_pairs" => 0,
+            "number_of_pairs" => $numberOfPairs,
             "state" => "STARTED"
         ]);
     }
