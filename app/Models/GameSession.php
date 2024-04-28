@@ -22,4 +22,9 @@ class GameSession extends Model
     {
         return $this->belongsTo(MemoTest::class);
     }
+
+    public function cardsGameSession()
+    {
+        return $this->hasMany(CardGameSession::class);
+    }
 }

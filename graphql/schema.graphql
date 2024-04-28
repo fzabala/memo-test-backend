@@ -29,6 +29,7 @@ type Mutation {
     createGameSession(gameId: Int!): GameSession
     updateRetriesInSession(id: Int!): GameSession
     completeSession(id: Int!): GameSession
+    updateProgress(id: Int!, flipped: Boolean!, selected: Boolean!): GameSession
 }
 
 "Account of a person who utilizes this application."
@@ -81,6 +82,16 @@ type GameSession {
     number_of_pairs: Int!
     score: Int
     state: GameSessionStatus!
+    cardsGameSession: [CardGameSession!]!
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+type CardGameSession {
+    id: ID!
+    image: Image!
+    selected: Boolean!
+    flipped: Boolean!
     created_at: DateTime!
     updated_at: DateTime!
 }
