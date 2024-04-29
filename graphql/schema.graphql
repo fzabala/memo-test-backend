@@ -27,7 +27,6 @@ type Query {
 
 type Mutation {
     createGameSession(gameId: Int!): GameSession
-    updateRetriesInSession(id: Int!): GameSession
     completeSession(id: Int!): GameSession
     updateProgress(id: Int!, flipped: Boolean!, selected: Boolean!): GameSession
 }

@@ -23,9 +23,14 @@ final readonly class UpdateProgress
         if (!$flippedCardGameSession) {
             $cardGameSession->update(['flipped' => $flipped, "selected" => $selected]);
         } else {
+            // save progress
             $isMatch = $cardGameSession->image_id === $flippedCardGameSession->image_id;
             $cardGameSession->update(['flipped' => $isMatch, "selected" => false]);
             $flippedCardGameSession->update(['flipped' => $isMatch, "selected" => false]);
+
+            // save retries
+            GameSession::where('id', $cardGameSession->game_session_id)
+                ->increment('retries', 1);
         }
         return CardGameSession::find($id)->gameSession->load('cardsGameSession');
     }
