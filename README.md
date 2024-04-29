@@ -1,66 +1,71 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# MemoTest (backend)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is the well-known "memo" game. This project only contains the backend, to run it you will need the frontend
 
-## About Laravel
+### The frontend repo
+https://github.com/fzabala/memo-test-frontend
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Prerequisites
+1. Git (you can find it here: https://git-scm.com/)
+2. Docker (just follow the instructions from here: https://www.docker.com/)
+3. PHP (here's a guide you can follow https://www.php.net/manual/es/install.php)
+   1. This project uses laravel, so here's the requirements https://laravel.com/docs/11.x/deployment#server-requirements
+4. Composer (you can follow these steps https://getcomposer.org/download/)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### How to run it?
+1. Open a terminal and clone this repo using `git clone https://github.com/fzabala/memo-test-backend`
+1. Navigate to the project folder `cd memo-test-backend`
+1. Create your `.env` file based on `env.example` by running `cp .env.example .env`
+   1. Setup the DB_* variables
+   1. You can use these values
+        ```
+        DB_CONNECTION=mysql
+        DB_HOST=mysql
+        DB_PORT=3306
+        DB_DATABASE=laravel
+        DB_USERNAME=sail
+        DB_PASSWORD=password
+        ```
+    1. Setup the REDIS_* variables
+        ```
+        REDIS_CLIENT=phpredis
+        REDIS_HOST=redis    
+        REDIS_PASSWORD=null
+        REDIS_PORT=6379
+        ```
+    1. Setup the MAIL_* variables
+        ```
+        MAIL_MAILER=smtp
+        MAIL_HOST=mailpit
+        MAIL_PORT=1025
+        MAIL_USERNAME=null
+        MAIL_PASSWORD=null
+        MAIL_ENCRYPTION=null
+        MAIL_FROM_ADDRESS="hello@example.com"
+        MAIL_FROM_NAME="${APP_NAME}"
+        ```
+1. Install the dependencies `composer install`
+1. Run the project with `./vendor/bin/sail build`
+1. Run the project with `./vendor/bin/sail up`
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Open a new terminal and then
+1. Generate app key with `php artisan key:generate`
+1. Run the required migrations `./vendor/bin/sail artisan migrate`
+1. Run the required seed `./vendor/bin/sail artisan db:seed`
 
-## Learning Laravel
+### Troubleshooting
+If you receive an error while running `./vendor/bin/sail up`
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+`Error starting userland proxy: listen tcp4 0.0.0.0:6379: bind: address already in use`
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Check if ports are available in your environment
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+These are the port we're using
+1. mysql: 3306
+1. redis: 6379
+1. meilisearch: 7700
+1. mailpit: 1025
 
-## Laravel Sponsors
+You can check it by running `sudo lsof -t -i :<PORT_NUMBER>`
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+If you want to use these ports you should kill the process or stop the service
