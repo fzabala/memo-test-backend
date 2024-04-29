@@ -8,6 +8,7 @@ type Query {
 }
 
 type Mutation {
+    createMemoTest(name: String!, images: [String!]!): MemoTest
     createGameSession(gameId: Int!): GameSession
     completeSession(id: Int!): GameSession
     updateProgress(id: Int!, flipped: Boolean!, selected: Boolean!): GameSession
