@@ -8,6 +8,7 @@ type Query {
 }
 
 type Mutation {
+    deleteMemoTestById(id: ID!): Boolean
     createMemoTest(name: String!, images: [String!]!): MemoTest
     removeImageFromMemoTestById(id: ID!, imageId: Int!): MemoTest
     addImageToMemoTest(id: ID!, image: String!): MemoTest
