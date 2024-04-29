@@ -57,6 +57,7 @@ type MemoTest {
     name: String!
     email: String!
     images: [Image!]! @hasMany
+    active_game_session: GameSession
     created_at: DateTime!
     updated_at: DateTime!
     highest_score: Int
