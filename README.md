@@ -76,3 +76,12 @@ If you want to use these ports you should kill the process or stop the service
 1. Check if `public/storage` symlink exists and it's connected to `storage/app/public`
    1. In the project folder, you can run `ls -la public/storage` and see the output
 1. You may need to change the permissions of the `storage` folder to 775
+
+#### There is no existing directory at /storage/logs and its not buildable: Permission denied
+Try these commands
+
+`php artisan route:clear`
+
+`php artisan config:clear`
+
+`php artisan cache:clear`
