@@ -80,8 +80,8 @@ If you want to use these ports you should kill the process or stop the service
 #### There is no existing directory at /storage/logs and its not buildable: Permission denied
 Try these commands
 
-`php artisan route:clear`
+`./vendor/bin/sail artisan route:clear`
 
-`php artisan config:clear`
+`./vendor/bin/sail artisan config:clear`
 
-`php artisan cache:clear`
+`./vendor/bin/sail artisan cache:clear`
